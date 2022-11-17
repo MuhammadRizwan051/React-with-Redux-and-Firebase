@@ -6,6 +6,9 @@ import '../App.css';
 // import Loader from '../assets/loader.gif'
 import CircularProgress from "@mui/material/CircularProgress";
 // import userImg from '../assets/user.png'
+import { useDispatch } from "react-redux";
+import { edit } from "../redux/loginReducer";
+
 
 
 function Login() {
@@ -15,24 +18,36 @@ function Login() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const [model, setModel] = useState()
 
-  let login = () => {
-    setIsLoading(true)
-    loginUser({ userName, email, password })
-      .then((success) => {
-        // navigate(`/admin/${success.id.slice(0, 8)}`)
-        // navigate(`/${success.id}`)
-        setIsLoading(false)
-        if (email === 'admin@gmail.com') {
-          console.log()
-        }
-        console.log((success))
-      })
-      .catch((error) => {
-        setIsLoading(false)
-        console.log(error)
-      })
-  };
+  // let login = () => {
+  //   setIsLoading(true)
+  //   loginUser({ email, password })
+  //     .then((success) => {
+  //       navigate(`/${success.id}`)
+  //       console.log(success)
+  //       // navigate(`/admin/${success.id.slice(0, 8)}`)
+  //       // console.log(model)
+  //       // setIsLoading(false)
+  //       // if (email === 'admin@gmail.com') {
+  //       //   console.log()
+  //       // }
+  //       // console.log((success))
+  //     })
+  //     .catch((error) => {
+  //       setIsLoading(false)
+  //       console.log(error)
+  //     })
+  //   // dispatch(edit(model));
+  // };
+
+
+let login = () =>{
+  console.log(model)
+  dispatch(edit(model))
+  navigate('/home')
+}
 
   return (
     <>
@@ -49,20 +64,13 @@ function Login() {
               SignUp
             </Button>
           </Box>
-          {/* <Box mt={4}>
-            <TextField
-              label="User Name"
-              variant="outlined"
-              fullWidth
-              onChange={(e) => setUserName(e.target.value)}
-            />
-          </Box> */}
           <Box mt={2}>
             <TextField
               label="Email"
               variant="outlined"
               fullWidth
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e)=>setModel({ ...model, email: e.target.value })}
+            // onChange={(e) => setEmail(e.target.value )}
             />
           </Box>
           <Box mt={2}>
@@ -71,7 +79,8 @@ function Login() {
               variant="outlined"
               fullWidth
               type="password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e)=>setModel({ ...model, password: e.target.value })}
+            // onChange={(e) => setPassword(e.target.value )}
             />
           </Box>
           <Box my={2}>
@@ -81,9 +90,6 @@ function Login() {
           </Box>
           <Box>
             <Typography sx={{ fontWeight: 'bold' }}>Create new account <Link to="/signup" style={{ textDecoration: 'none' }}>SIGN UP</Link></Typography>
-          </Box>
-          <Box mt={5} mb={0} py={2} sx={{border: '1px solid black', backgroundColor: 'black', borderTopRightRadius: '60px',borderBottomLeftRadius: '60px'}}>
-            <Typography onClick={()=>navigate('/form')} sx={{ fontWeight: 'bold', fontSize: '24px',  }}> <Link to="/signup" style={{ textDecoration: 'none', color: 'white', fontFamily:'verdana' }}>Registration Form</Link></Typography>
           </Box>
         </Box>
       </Box>
