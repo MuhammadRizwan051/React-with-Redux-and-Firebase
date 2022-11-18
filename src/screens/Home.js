@@ -24,7 +24,7 @@ function Home() {
         checkAuth()
     }, [])
 
-    const loginDataFromReducer = useSelector(a => a.loginReducer)
+    const loginDataFromReducer = useSelector(a => a.loginReducer)  // we receive whole reducer here in parameter 'a' which we send from store.js
     console.log(loginDataFromReducer)  // Object receive  loginSlice(initialState) data
 
     return (

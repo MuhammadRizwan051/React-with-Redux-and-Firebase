@@ -45,7 +45,7 @@ function Login() {
 
 let login = () =>{
   console.log(model)
-  dispatch(edit(model))
+  dispatch(edit(model))  // send data of object to redux using dispatch and dispatch is use for update data only 
   navigate('/home')
 }
 
